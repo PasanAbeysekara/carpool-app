@@ -19,9 +19,9 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <Router>
-      <div className='bg-gradient-to-b from-indigo-50 to-indigo-100'>
+      <div className='bg-gradient-to-b from-indigo-50 to-indigo-100 flex flex-col min-h-screen'>
         <Navbar />
-        <div className="App max-w-6xl mx-auto px-4">
+        <div className="App max-w-6xl mx-auto px-4 flex-1">
           {/* <LoginButton/>
           <LogoutButton/>
           <ProfileButton/>
@@ -40,6 +40,10 @@ function App() {
             <Route path="/edit-request/:rideId" element={<EditRequestPage />} />
           </Routes>
         </div>
+        <footer className="mt-auto bg-gray-800 w-full py-6 text-center">
+          <p className="text-gray-300">&copy; 2023 GoTogether. All rights reserved.</p>
+        </footer>
+
       </div>
       
     </Router>

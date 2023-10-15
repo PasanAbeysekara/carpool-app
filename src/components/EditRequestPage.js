@@ -44,7 +44,7 @@ const EditRequestPage = () => {
               'Content-Type': 'application/json'
             }
         };
-        Axios.patch(`http://localhost:3000/requests/${rideId}`, formData, config)
+        Axios.put(`http://localhost:3000/requests/${rideId}`, formData, config)
             .then(res => {
                 console.log('Request updated:', res.data);
                 navigate("/all-requests"); // Redirect to "/all-requests" after successful submission
@@ -55,7 +55,7 @@ const EditRequestPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+        <div className="min-h-screen py-6 flex flex-col justify-center sm:py-12">
             <div className="relative py-3 sm:max-w-xl sm:mx-auto">
                 <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
                     <div className="max-w-md mx-auto">

@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.custom-container {
+    max-width: 700px; /* Adjust the width as per your requirement */
+    margin: 0 auto; /* Center the container horizontally */
+    /* Add more custom styles if needed */
+  }
+  

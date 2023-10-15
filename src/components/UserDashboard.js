@@ -25,15 +25,6 @@ class UserDashboard extends Component {
                             <a href="/all-requests" className="bg-blue-500 text-white px-4 py-2 rounded-md">View Requests</a>
                         </div>
                     </div>
-
-                    <div className="bg-white rounded-lg shadow-md p-4 mt-5">
-                        <h3 className="text-2xl font-bold mb-3">Account Settings</h3>
-                        {/* <!-- Placeholder account settings options --> */}
-                        <ul className="list-disc pl-5">
-                            <li><a href="#">Change Password</a></li>
-                            <li><a href="#">Notification Settings</a></li>
-                        </ul>
-                    </div>
                 </div>
 
             </div>

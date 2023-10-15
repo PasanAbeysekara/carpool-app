@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you are using React Router
-import { useAuth0 } from '@auth0/auth0-react'; // Import useAuth0 hook
+import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './auth/LoginButton';
 import LogoutButton from './auth/LogoutButton';
-import logo from '../assets/images/carpooly-logo.png'; // Import the logo image
+import logo from '../assets/images/carpooly-logo.png';
 
 const Navbar = () => {
-    const { isAuthenticated, user } = useAuth0(); // Get the isAuthenticated and user values from useAuth0
+    const { isAuthenticated, user } = useAuth0();
     const userFirstName = isAuthenticated ? user.name.split(' ')[0] : '';
 
     return (
         <nav className="bg-gray-800 p-4 sticky top-0 z-50">
-            <div className="container mx-auto flex justify-between items-center">
+            <div className="container mx-auto px-16 flex justify-between items-center">
                 <div>
                     <Link to="/">
                         <img className="h-8" src={logo} alt="Logo" />

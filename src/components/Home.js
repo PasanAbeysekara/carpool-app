@@ -38,7 +38,7 @@ const Home = () => {
                     <p className="text-gray-700 text-base">Cut down your travel expenses by sharing the ride with fellow travelers.</p>
                 </div>
             </div>
-            <div className="testimonials grid gap-12 grid-cols-1 sm:grid-cols-2 mt-16">
+            <div className="testimonials grid gap-12 grid-cols-1 sm:grid-cols-2 mt-16 mb-5">
                 <div className="testimonial bg-white rounded-lg shadow-xl p-8">
                     <p className="text-gray-800 text-lg mb-6">"Finding rides has never been easier! I love how simple and convenient GoTogether makes carpooling."</p>
                     <p className="text-gray-800 font-semibold">- Emily, A Happy Commuter</p>
@@ -48,9 +48,6 @@ const Home = () => {
                     <p className="text-gray-800 font-semibold">- John, A Regular User</p>
                 </div>
             </div>
-            <footer className="mt-16 text-gray-600">
-                <p>&copy; 2023 GoTogether. All rights reserved.</p>
-            </footer>
         </div>
     );
 };
