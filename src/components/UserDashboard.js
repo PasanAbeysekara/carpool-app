@@ -1,32 +1,65 @@
 import React, { Component } from 'react';
 import { withAuth0 } from "@auth0/auth0-react";
+import axios from 'axios';
 
 class UserDashboard extends Component {
+    state = {
+        requestCount: 0
+    };
+
+    componentDidMount() {
+        // Fetch the count of requests from the backend
+        axios.get('http://localhost:3000/requests/count')
+            .then(response => {
+                this.setState({ requestCount: response.data.count });
+            })
+            .catch(error => {
+                console.error('Error fetching request count:', error);
+            });
+    }
+
     render(){
         const { user, isAuthenticated } = this.props.auth0;
+        const { requestCount } = this.state;
 
         return(
-            <div>
-                {/* <!-- User Dashboard --> */}
-                <div className="container mt-5">
-                    <h1 className="text-3xl font-bold mb-5">Welcome to Your Dashboard, {isAuthenticated ? user.name : 'Guest'}</h1>
+            <div className="">
+                {/* User Dashboard */}
+                <div className="container mx-auto pt-10">
+                    <h1 className="text-4xl font-bold text-center mb-8">Welcome to Your Dashboard, {isAuthenticated ? user.name : 'Guest'}</h1>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="bg-white rounded-lg shadow-md p-4">
-                            <h5 className="text-xl font-bold mb-2">Profile Information</h5>
-                            {/* <!-- Placeholder user information --> */}
-                            <p className="mb-2">Name: {isAuthenticated ? user.name : 'Guest'}</p>
-                            <p className="mb-2">Email: {isAuthenticated ? user.email : 'guest@example.com'}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="bg-white rounded-lg shadow-md p-6">
+                            <h2 className="text-2xl font-bold mb-4 text-gray-800">Profile Information</h2>
+                            <div className="mb-4">
+                                <p className="text-lg text-gray-800">Name:</p>
+                                <p className="text-gray-600">{isAuthenticated ? user.name : 'Guest'}</p>
+                            </div>
+                            <div className="mb-4">
+                                <p className="text-lg text-gray-800">Email:</p>
+                                <p className="text-gray-600">{isAuthenticated ? user.email : 'guest@example.com'}</p>
+                            </div>
                         </div>
-                        <div className="bg-white rounded-lg shadow-md p-4">
-                            <h5 className="text-xl font-bold mb-2">My Requests</h5>
-                            {/* <!-- Placeholder user listings --> */}
-                            <p className="mb-2">You have [Placeholder Listing Count] active Requests.</p>
-                            <a href="/all-requests" className="bg-blue-500 text-white px-4 py-2 rounded-md">View Requests</a>
+                        <div className="bg-white rounded-lg shadow-md p-6">
+                            <h2 className="text-2xl font-bold mb-4 text-gray-800">My Requests</h2>
+                            <div className="mb-4">
+                                <p className="text-lg text-gray-800">You have {requestCount} active Requests.</p>
+                            </div>
+                            <a href="/all-requests" className="block w-full text-center bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md">
+                                View Requests
+                            </a>
+                        </div>
+                        <div className="bg-white rounded-lg shadow-md p-6">
+                            <h2 className="text-2xl font-bold mb-4 text-gray-800">Available Rides</h2>
+                            <div className="mb-4">
+                                <p className="text-lg text-gray-800">Find all available rides here.</p>
+                            </div>
+                            <a href="/rides" className="block w-full text-center bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md">
+                                View Available Rides
+                            </a>
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }

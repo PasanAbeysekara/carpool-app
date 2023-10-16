@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AllRequests() {
     const [requests, setRequests] = useState([]);
@@ -20,17 +22,26 @@ function AllRequests() {
             console.error("ID is undefined or null");
             return;
         }
-    
+
         Axios.delete(`http://localhost:3000/requests/${id}`)
             .then(res => {
                 console.log('Request deleted:', res.data);
                 setRequests(requests.filter(request => request._id !== id));
+                toast.error('Request deleted successfully', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000, // 3 seconds
+                    className: 'toast-error', // Custom class for red color
+                });
             })
             .catch(err => {
                 console.error('Error deleting request:', err);
+                toast.error('Failed to delete the request', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000, // 3 seconds
+                });
             });
     }
-    
+
     return (
         <div className="p-4">
             <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">All Requests</h2>
@@ -55,6 +66,7 @@ function AllRequests() {
                     </div>
                 ))}
             </div>
+            <ToastContainer />
         </div>
     );
 }

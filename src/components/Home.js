@@ -41,11 +41,11 @@ const Home = () => {
             <div className="testimonials grid gap-12 grid-cols-1 sm:grid-cols-2 mt-16 mb-5">
                 <div className="testimonial bg-white rounded-lg shadow-xl p-8">
                     <p className="text-gray-800 text-lg mb-6">"Finding rides has never been easier! I love how simple and convenient GoTogether makes carpooling."</p>
-                    <p className="text-gray-800 font-semibold">- Emily, A Happy Commuter</p>
+                    <p className="text-gray-800 font-semibold">- Amali, A Happy Commuter</p>
                 </div>
                 <div className="testimonial bg-white rounded-lg shadow-xl p-8">
                     <p className="text-gray-800 text-lg mb-6">"I've met some incredible people through this app. It's not just about sharing rides, it's about sharing experiences."</p>
-                    <p className="text-gray-800 font-semibold">- John, A Regular User</p>
+                    <p className="text-gray-800 font-semibold">- Sunil, A Regular User</p>
                 </div>
             </div>
         </div>

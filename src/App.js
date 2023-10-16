@@ -7,14 +7,11 @@ import PostForm from './components/PostForm';
 import UserDashboard from './components/UserDashboard';
 import AllRequests from './components/AllRequests';
 import AllRides from './components/AllRides';
-import LoginButton from './components/auth/LoginButton';
-import LogoutButton from './components/auth/LogoutButton';
 import ProfilePage from './components/auth/ProfilePage';
-import ProfileButton from './components/auth/ProfileButton';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UserDashboardButton from './components/UserDashboardButton';
 import EditRequestPage from './components/EditRequestPage';
 import Navbar from './components/Navbar';
+import AccountSettings from './components/AccountSettings';
 
 function App() {
   return (
@@ -38,6 +35,7 @@ function App() {
             <Route path="/user-dashboard" element={<UserDashboard />} />
             <Route path="/all-requests" element={<AllRequests />} />
             <Route path="/edit-request/:rideId" element={<EditRequestPage />} />
+            <Route path='/account-settings' element={<AccountSettings />}/>
           </Routes>
         </div>
         <footer className="mt-auto bg-gray-800 w-full py-6 text-center">

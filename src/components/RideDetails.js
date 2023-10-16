@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RideDetails = () => {
   const { id } = useParams();
   const [ride, setRide] = useState(null);
+  const navigate = useNavigate();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     const fetchRide = async () => {
@@ -21,6 +26,21 @@ const RideDetails = () => {
   if (!ride) {
     return <div>Loading...</div>;
   }
+
+  const handleRequestSeat = () => {
+    if (isAuthenticated) {
+      navigate(`/rides/${id}/create-request`);
+    } else {
+      toast.error('You need to be signed in to make a request.', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000, // 5 seconds
+      });
+      setTimeout(() => {
+        loginWithRedirect();
+      }, 5000); // Delay the redirection by 1 second
+    }
+  };
+
 
   return (
     <div className="custom-container mx-auto p-4">
@@ -65,15 +85,16 @@ const RideDetails = () => {
           </div>
         </div>
         <div className="flex justify-center mt-8">
-          <Link
-            to={`/rides/${id}/create-request`}
+          <button
+            onClick={handleRequestSeat}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-md focus:outline-none focus:shadow-outline"
             style={{ boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)' }}
           >
             Request a Seat
-          </Link>
+          </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
