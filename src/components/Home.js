@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import shareRideImage from '../assets/images/share-ride.png';
-import goGreenImage from '../assets/images/go-green.png'; 
+import goGreenImage from '../assets/images/go-green.png';
 import saveMoneyImage from '../assets/images/save-money.png';
 import Typewriter from 'typewriter-effect';
+import { PacmanLoader } from 'react-spinners';
 
 const Home = () => {
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 3000); // Set the time according to your preference
+
+        return () => clearTimeout(timer);
+    }, []);
 
     const goToRides = () => {
         navigate('/rides');
     };
+
+    if (loading) {
+        return (
+            <div className="loading-container flex justify-center items-center h-screen">
+                <PacmanLoader size={40} margin={2} color={"#00BFFF"} />
+            </div>
+        );
+    }
+
+
 
     return (
         <div className="home-container bg-gradient-to-b from-indigo-50 to-indigo-100 min-h-screen flex flex-col items-center justify-center">

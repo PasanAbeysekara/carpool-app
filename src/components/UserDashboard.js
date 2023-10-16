@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
 import { withAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
+import { PacmanLoader } from 'react-spinners';
 
 class UserDashboard extends Component {
     state = {
-        requestCount: 0
+        requestCount: 0,
+        loading: true
     };
 
     componentDidMount() {
-        // Fetch the count of requests from the backend
-        axios.get('http://localhost:3000/requests/count')
+        // Simulate loading for demonstration purposes
+        setTimeout(() => {
+          axios.get('http://localhost:3000/requests/count')
             .then(response => {
-                this.setState({ requestCount: response.data.count });
+              this.setState({ requestCount: response.data.count, loading: false });
             })
             .catch(error => {
-                console.error('Error fetching request count:', error);
+              console.error('Error fetching request count:', error);
+              this.setState({ loading: false }); // Set loading to false in case of an error
             });
+        }, 2000); // Simulated delay of 2 seconds
     }
 
-    render(){
+    render() {
         const { user, isAuthenticated } = this.props.auth0;
-        const { requestCount } = this.state;
+        const { requestCount, loading } = this.state;
+
+        if (loading) {
+            return (
+                <div className="loading-container flex justify-center items-center h-screen">
+                    <PacmanLoader color={'#00BFFF'} size={40} />
+                </div>
+            );
+        }
+
 
         return(
             <div className="">

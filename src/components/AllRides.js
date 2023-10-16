@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { css } from '@emotion/react';
+import { PacmanLoader } from 'react-spinners';
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const AllRides = () => {
   const [rides, setRides] = useState([]);
@@ -12,7 +20,10 @@ const AllRides = () => {
       try {
         const response = await axios.get('http://localhost:3000/rides'); // Replace with your API endpoint
         setRides(response.data);
-        setLoading(false);
+        // Simulating a delay for demonstration purposes
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000); // Adjust the delay time as needed
       } catch (error) {
         console.error('Error fetching rides:', error);
         setError('Error fetching data. Please try again later.');
@@ -21,6 +32,14 @@ const AllRides = () => {
     };
     fetchRides();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading-container flex justify-center items-center h-screen">
+        <PacmanLoader color={'#00BFFF'} css={override} size={40} />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">

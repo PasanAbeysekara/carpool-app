@@ -3,19 +3,45 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PacmanLoader } from 'react-spinners';
 
 function AllRequests() {
     const [requests, setRequests] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        Axios.get("http://localhost:3000/requests")
-            .then(res => {
-                setRequests(res.data);
-            })
-            .catch(err => {
-                console.error('Error:', err);
-            });
+        const fetchData = async () => {
+            try {
+                // Simulating a delay for demonstration purposes
+                const timeout = setTimeout(() => {
+                    Axios.get("http://localhost:3000/requests")
+                        .then(res => {
+                            setRequests(res.data);
+                            setLoading(false); // Set loading to false when data is fetched
+                        })
+                        .catch(err => {
+                            console.error('Error:', err);
+                            setLoading(false); // Set loading to false in case of an error
+                        });
+                }, 2000); // Simulated delay of 2 seconds
+    
+                return () => clearTimeout(timeout); // Clear the timeout in case of component unmount
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false); // Set loading to false in case of an error
+            }
+        };
+    
+        fetchData();
     }, []);
+
+    if (loading) {
+        return (
+            <div className="loading-container flex justify-center items-center h-screen">
+                <PacmanLoader color={'#00BFFF'} size={40} />
+            </div>
+        );
+    }
 
     function deleteRequest(id) {
         if (!id) {

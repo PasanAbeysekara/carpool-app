@@ -4,10 +4,12 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PacmanLoader } from 'react-spinners';
 
 const RideDetails = () => {
   const { id } = useParams();
   const [ride, setRide] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -16,15 +18,24 @@ const RideDetails = () => {
       try {
         const response = await axios.get(`http://localhost:3000/rides/${id}`); // Replace with your API endpoint
         setRide(response.data);
+        // Simulate a delay for demonstration purposes
+        setTimeout(() => {
+          setLoading(false); // Set loading to false after the timeout
+        }, 2000);
       } catch (error) {
         console.error('Error fetching ride:', error);
+        setLoading(false); // Also set loading to false in case of an error
       }
     };
     fetchRide();
   }, [id]);
 
-  if (!ride) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="loading-container flex justify-center items-center h-screen">
+        <PacmanLoader color={'#00BFFF'} size={45} />
+      </div>
+    );
   }
 
   const handleRequestSeat = () => {
