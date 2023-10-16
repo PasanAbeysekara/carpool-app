@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const EditRequestPage = () => {
     const { rideId } = useParams();
@@ -38,16 +42,20 @@ const EditRequestPage = () => {
     };
 
     const handleSubmit = e => {
-        e.preventDefault();  
+        e.preventDefault();
         const config = {
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         };
         Axios.put(`http://localhost:3000/requests/${rideId}`, formData, config)
             .then(res => {
                 console.log('Request updated:', res.data);
-                navigate("/all-requests"); // Redirect to "/all-requests" after successful submission
+                navigate('/all-requests'); // Redirect to "/all-requests" after successful submission
+                toast.success('Changes saved successfully', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000, // 3 seconds
+                });
             })
             .catch(err => {
                 console.error('Error:', err);

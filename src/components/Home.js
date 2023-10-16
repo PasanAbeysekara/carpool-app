@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import shareRideImage from '../assets/images/share-ride.png';
 import goGreenImage from '../assets/images/go-green.png'; 
 import saveMoneyImage from '../assets/images/save-money.png';
+import Typewriter from 'typewriter-effect';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -13,7 +14,22 @@ const Home = () => {
 
     return (
         <div className="home-container bg-gradient-to-b from-indigo-50 to-indigo-100 min-h-screen flex flex-col items-center justify-center">
-            <h1 className="text-5xl font-extrabold text-indigo-700 my-6">GoTogether</h1>
+            {/* <h1 className="text-5xl font-extrabold text-indigo-700 my-6">GoTogether</h1> */}
+            <Typewriter
+                onInit={(typewriter) => {
+                    typewriter
+                        .typeString('GoTogether !')
+                        .pauseFor(2000)
+                        .deleteAll()
+                        .start();
+                }}
+                options={{
+                    loop: true
+                }}
+            />
+
+
+
             <p className="text-xl text-gray-800 mb-12">Connecting Your Journeys</p>
             <button
                 onClick={goToRides}
