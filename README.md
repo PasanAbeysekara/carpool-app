@@ -17,7 +17,7 @@ GoTogether is a React-based web application designed to simplify the process of 
 
 To get started with the GoTogether application, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/GoTogether.git`
+1. Clone the repository: `git clone https://github.com/PasanAbeysekara/carpool-app`
 2. Install dependencies: `npm install`
 3. Run the application: `npm start`
 
